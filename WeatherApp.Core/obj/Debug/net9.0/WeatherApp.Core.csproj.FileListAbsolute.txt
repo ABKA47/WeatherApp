@@ -1,0 +1,14 @@
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\bin\Debug\net9.0\WeatherApp.Core.deps.json
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\bin\Debug\net9.0\WeatherApp.Core.runtimeconfig.json
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\bin\Debug\net9.0\WeatherApp.Core.dll
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\bin\Debug\net9.0\WeatherApp.Core.pdb
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.csproj.AssemblyReference.cache
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.AssemblyInfoInputs.cache
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.AssemblyInfo.cs
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.dll
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\refint\WeatherApp.Core.dll
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.pdb
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\WeatherApp.Core.genruntimeconfig.cache
+C:\Users\Dell\Desktop\ParibuCase\WeatherApp.Core\obj\Debug\net9.0\ref\WeatherApp.Core.dll

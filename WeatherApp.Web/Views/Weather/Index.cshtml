@@ -1,0 +1,141 @@
+﻿@using System.Globalization
+@model WeatherApp.Core.ViewModels.WeatherViewModel
+
+@{
+	ViewData["Title"] = "Hava Durumu";
+}
+
+<div class="container mt-5">
+	<h2 class="mb-4">Hava Durumu Sorgulama</h2>
+
+	@if (TempData["Success"] != null)
+	{
+		<div class="alert alert-success">
+			@TempData["Success"]
+		</div>
+	}
+
+	@if (TempData["Error"] != null)
+	{
+		<div class="alert alert-danger">
+			@TempData["Error"]
+		</div>
+	}
+
+	@if (!ViewData.ModelState.IsValid)
+	{
+		<div class="alert alert-danger">
+			<ul>
+				@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+				{
+					<li>@error.ErrorMessage</li>
+				}
+			</ul>
+		</div>
+	}
+
+	<form asp-action="Index" method="post" class="mb-4">
+		<div class="form-group">
+			<label for="CityNames">Şehir Adları (Virgül ile ayırınız)</label>
+			<input type="text" class="form-control" id="CityNames" name="CityNames" placeholder="Örneğin: İstanbul, Ankara, İzmir" value="@Model.CityNames" required>
+			<small class="form-text text-muted">Birden fazla şehir ismi girmek için aralarına virgül koyunuz.</small>
+		</div>
+		<button type="submit" class="btn btn-primary">Sorgula</button>
+	</form>
+
+	@if (Model.CitiesWeather.Any())
+	{
+		<h4>Sorgulanan Şehirlerin Ortalamaları</h4>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Şehir Adı</th>
+					<th>Ortalama Sıcaklık (°C)</th>
+					<th>İşlem</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var city in Model.CitiesWeather)
+				{
+					<tr>
+						<td>@city.CityName</td>
+						<td>
+							@if (city.AverageTemperature.HasValue)
+							{
+								@(Convert.ToInt32(city.AverageTemperature.Value))
+							}
+							else
+							{
+								<span class="text-danger">@city.ErrorMessage</span>
+							}
+						</td>
+						<td>
+							<form asp-action="AddFavorite" method="post" class="form-inline mb-3">
+								<div class="form-group mx-sm-3 mb-2">
+									<input hidden type="text" class="form-control" id="cityName" name="cityName" value="@city.CityName">
+								</div>
+								<button type="submit" class="btn btn-success mb-2">Favorilere Ekle</button>
+							</form>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+
+	<hr />
+
+	<h3>Favori Şehirler</h3>
+
+
+
+	@if (Model.FavoriteCitiesWeather.Any())
+	{
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Şehir Adı</th>
+					<th>Ortalama Sıcaklık (°C)</th>
+					<th>İşlem</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var city in Model.FavoriteCitiesWeather)
+				{
+					<tr>
+						<td>@city.CityName</td>
+						<td>
+							@if (city.AverageTemperature.HasValue)
+							{
+								@(Convert.ToInt32(city.AverageTemperature.Value))
+							}
+							else
+							{
+								<span class="text-danger">Bilgi Yok</span>
+							}
+						</td>
+						<td>
+							<form asp-action="RemoveFavorite" method="post" style="display:inline;">
+								<input type="hidden" name="favoriteCityId" value="@city.Id" />
+								<button type="submit" class="btn btn-danger btn-sm">Sil</button>
+							</form>
+						</td>						
+					</tr>
+				}
+			</tbody>
+		</table>
+
+		<h4>En Sıcak ve En Soğuk Favori Şehirler</h4>
+		<p>
+			<strong>En Sıcak Şehir:</strong> @(Model.FavoriteCitiesSummary.HottestCity ?? "Bilgi Yok") (@(Model.FavoriteCitiesSummary.HottestTemperature?.ToString("F0", new CultureInfo("tr-TR")) ?? "-"))
+		</p>
+		<p>
+			<strong>En Soğuk Şehir:</strong> @(Model.FavoriteCitiesSummary.ColdestCity ?? "Bilgi Yok") (@(Model.FavoriteCitiesSummary.ColdestTemperature?.ToString("F0", new CultureInfo("tr-TR")) ?? "-"))
+		</p>
+
+	}
+	else
+	{
+		<p>Henüz favori şehriniz yok.</p>
+	}
+</div>

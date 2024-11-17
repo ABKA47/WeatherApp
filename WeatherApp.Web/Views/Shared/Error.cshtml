@@ -1,0 +1,16 @@
+﻿@model WeatherApp.Web.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Hata";
+}
+
+<h1 class="text-danger">Bir hata oluştu.</h1>
+<p>
+    @if (Model?.RequestId != null)
+    {
+        <text>İstek ID: @Model.RequestId</text>
+    }
+    else
+    {
+        <text>İstek ID'si mevcut değil.</text>
+    }
+</p>

@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Strong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+  redis:
+    image: redis:6.0-alpine
+    ports:
+      - "6379:6379"
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - WeatherApiCom__ApiKey=147d644004414106a2f75650232001
+      - WeatherStack__ApiKey=838c0d5e8fcc1dbbc66e8c1c0a14c6e5
+      - Redis__ConnectionString=redis:6379
+      - ConnectionStrings__DefaultConnection=Server=db;Database=weatherdb;User Id=sa;Password=Strong!Passw0rd;TrustServerCertificate=True;Encrypt=true;
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  sqlserverdata:
